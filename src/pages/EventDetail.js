@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { redirect, useLoaderData, useParams, useRouteLoaderData } from "react-router-dom";
 import EventItem from "../components/EventItem";
 import { EVENT_URL } from "../config/host-config";
+import { getUserToken } from "../config/auth";
 
 const EventDetail = () => {
 
@@ -24,7 +25,10 @@ export const loader = async ({ params }) => {
   // const { eventId: id } = useParams();
   // const [ev, setEv] = useState({});
 
-  const response = await fetch(`${EVENT_URL}/${id}`);
+  const response = await fetch(`${EVENT_URL}/${id}`, {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + getUserToken() }
+  });
 
   if (!response.ok) {
     // ... 예외처리
@@ -39,6 +43,7 @@ export const action = async ({ params }) => {
 
   const response = await fetch(`${EVENT_URL}/${params.eventId}`, {
     method: "DELETE",
+    headers: { 'Authorization': 'Bearer ' + getUserToken() }
   });
 
   if (!response.ok) {
