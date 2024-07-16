@@ -8,7 +8,7 @@ import {
 import styles from "./MainNavigation.module.scss";
 
 const MainNavigation = ({ isActive }) => {
-  
+
   const userData = useRouteLoaderData("user-data");
 
   const data = useLoaderData();
@@ -30,6 +30,7 @@ const MainNavigation = ({ isActive }) => {
               Home
             </NavLink>
           </li>
+          
           <li>
             <NavLink to="events" className={activeFn}>
               Events
